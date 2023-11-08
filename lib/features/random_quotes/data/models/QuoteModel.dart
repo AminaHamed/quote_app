@@ -9,11 +9,11 @@ class QuoteModel extends Quote {
     return QuoteModel(content: json['q'], author: json['a'], h: json['h']);
   }
 
-// Map<String, dynamic> toJson() {
-//   final map = <String, dynamic>{};
-//   map['q'] = content;
-//   map['a'] = author;
-//   map['h'] = h;
-//   return map;
-// }
+Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['q'] = content;
+    map['a'] = author;
+    map['h'] = h;
+    return map;
+  }
 }

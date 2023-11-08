@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quotes_app/injection_container.dart' as di;
 
 import '../../core/utils/app_strings.dart';
+import '../../features/random_quotes/presentation/cubit/random_quote_cubit.dart';
 import '../../features/random_quotes/presentation/screens/quote_screen.dart';
 
 class Routes {
@@ -12,18 +15,25 @@ class AppRoutes {
   static Route? onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       case Routes.initialRoute:
-        return MaterialPageRoute(builder: (context) {
-          // return const SplashScreen();
-          return QuoteScreen();
-        });
+        return MaterialPageRoute(builder: ((context) {
+          return BlocProvider(
+            create: ((context) => di.sl<RandomQuoteCubit>()),
+            child: const QuoteScreen(),
+          );
+        }));
 
-      // case Routes.randomQuoteRoute:
-      //   return MaterialPageRoute(builder: ((context) {
-      //     return BlocProvider(
-      //       create: ((context) => di.sl<RandomQuoteCubit>()),
-      //       child: const QuoteScreen(),
-      //     );
-      //   }));
+      // return MaterialPageRoute(builder: (context) {
+      //   // return const SplashScreen();
+      //   return QuoteScreen();
+      // });
+
+      case Routes.randomQuoteRoute:
+        return MaterialPageRoute(builder: ((context) {
+          return BlocProvider(
+            create: ((context) => di.sl<RandomQuoteCubit>()),
+            child: const QuoteScreen(),
+          );
+        }));
       default:
         return undefinedRoute();
     }
